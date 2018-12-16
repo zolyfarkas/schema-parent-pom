@@ -46,6 +46,7 @@
     <avro.validator.deprecationRemoval>true</avro.validator.deprecationRemoval>
     <avro.validator.maxNrOfVersionsToCheckForCompatibility>20</avro.validator.maxNrOfVersionsToCheckForCompatibility>
     <avro.validator.maxNrOfDaysBackCheckForCompatibility>365</avro.validator.maxNrOfDaysBackCheckForCompatibility>
+    <avro.validator.validFieldNames></avro.validator.validFieldNames>
   </properties>
 
     <url>${scm.url}</url>
@@ -113,6 +114,7 @@
             <compatibility.maxNrOfVersionsToCheckForCompatibility>${avro.validator.maxNrOfVersionsToCheckForCompatibility}</compatibility.maxNrOfVersionsToCheckForCompatibility>
             <compatibility.maxNrOfDaysBackCheckForCompatibility>${avro.validator.maxNrOfDaysBackCheckForCompatibility}</compatibility.maxNrOfDaysBackCheckForCompatibility>
             <compatibility.deprecationRemoval>${avro.validator.deprecationRemoval}</compatibility.deprecationRemoval>
+            <namesValidator.validFieldNames>${avro.validator.validFieldNames}</namesValidator.validFieldNames>
           </validatorConfigs>
         </configuration>
         <dependencies>
