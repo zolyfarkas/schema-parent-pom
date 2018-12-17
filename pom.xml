@@ -73,6 +73,17 @@
         </license>
     </licenses>
 
+    <repositories>
+      <repository>
+        <snapshots>
+          <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-zolyfarkas-core</id>
+        <name>bintray</name>
+        <url>https://dl.bintray.com/zolyfarkas/core</url>
+      </repository>
+    </repositories>
+
   <distributionManagement>
         <repository>
             <id>bintray-zolyfarkas-core</id>
