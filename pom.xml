@@ -147,7 +147,9 @@
         <version>3.7.0</version>
         <configuration>
           <fork>true</fork>
+          <!--
           <executable>${java.home}/bin/javac</executable>
+            -->
           <compilerVersion>${java.version}</compilerVersion>
           <source>${java.version}</source>
           <target>${java.version}</target>
