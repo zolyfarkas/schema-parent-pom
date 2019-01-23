@@ -19,27 +19,27 @@ This a parent pom for schema projects.
 
 Here is how a schema project that uses this parent will look like:
 
-  <?xml version="1.0" encoding="UTF-8"?>
-  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.spf4j.avro.examples</groupId>
-    <artifactId>test-schema</artifactId>
-    <packaging>jar</packaging>
-    <version>MY_VERSION</version>
-    <name>${project.artifactId}-${project.version}</name>
-    <description>Avro schema example</description>
-    <parent>
-      <groupId>org.spf4j.avro</groupId>
-      <artifactId>schema-parent-pom</artifactId>
-      <version>LATEST</version>
-    </parent>
-    <dependencies>
-      <dependency> <!-- this schema will re-use schema's from this dependency -->
-          <groupId>org.spf4j.avro.examples</groupId>
-          <artifactId>test-schema-common</artifactId>
-          <version>1.5</version>
-      </dependency>
-    </dependencies>
-  </project>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <groupId>org.spf4j.avro.examples</groupId>
+      <artifactId>test-schema</artifactId>
+      <packaging>jar</packaging>
+      <version>MY_VERSION</version>
+      <name>${project.artifactId}-${project.version}</name>
+      <description>Avro schema example</description>
+      <parent>
+        <groupId>org.spf4j.avro</groupId>
+        <artifactId>schema-parent-pom</artifactId>
+        <version>LATEST</version>
+      </parent>
+      <dependencies>
+        <dependency> <!-- this schema will re-use schema's from this dependency -->
+            <groupId>org.spf4j.avro.examples</groupId>
+            <artifactId>test-schema-common</artifactId>
+            <version>1.5</version>
+        </dependency>
+      </dependencies>
+    </project>
 
 for an example please see [core-schema](https://github.com/zolyfarkas/core-schema)
