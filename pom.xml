@@ -38,6 +38,7 @@
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
     <scm.connection>scm:git:${scm.url}.git</scm.connection>
     <skip.avrodoc>false</skip.avrodoc>
+    <skip.avrodoc.html>true</skip.avrodoc.html> <!-- set to false if html should be published to repo -->
     <node.downloadUrl>https://nodejs.org/dist/</node.downloadUrl>
     <npm.downloadUrl>https://registry.npmjs.org/npm/-/</npm.downloadUrl>
     <npm.registryUrl />
@@ -299,6 +300,18 @@
                       <type>jar</type>
                       <classifier>avrodoc</classifier>
                   </artifact>
+               </artifacts>
+            </configuration>
+          </execution>
+          <execution>
+            <id>attach-avrodoc-html</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <skipAttach>${skip.avrodoc.html}</skipAttach>
+               <artifacts>
                   <artifact>
                       <file>${project.basedir}/target/avrodoc.html</file>
                       <type>html</type>
