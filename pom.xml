@@ -303,6 +303,11 @@
                       <type>jar</type>
                       <classifier>avrodoc</classifier>
                   </artifact>
+                  <artifact>
+                      <file>${project.basedir}/target/avrodoc.html</file>
+                      <type>html</type>
+                      <classifier>avrodoc</classifier>
+                  </artifact>
                </artifacts>
             </configuration>
           </execution>
