@@ -48,7 +48,7 @@
     <avro.validator.maxNrOfVersionsToCheckForCompatibility>20</avro.validator.maxNrOfVersionsToCheckForCompatibility>
     <avro.validator.maxNrOfDaysBackCheckForCompatibility>365</avro.validator.maxNrOfDaysBackCheckForCompatibility>
     <avro.createSetters>false</avro.createSetters>
-    <avro.validator.validFieldNames />
+    <avro.validator.validFieldNames>id</avro.validator.validFieldNames>
   </properties>
 
     <url>${scm.url}</url>
