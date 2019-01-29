@@ -23,7 +23,7 @@
   <artifactId>schema-parent-pom</artifactId>
   <version>0.11-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>${project.artifactId}</name>
+  <name>${project.artifactId}-${project.version}</name>
   <description>Avro schema project parent</description>
   <properties>
     <java.version>1.8</java.version>
