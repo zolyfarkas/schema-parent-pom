@@ -29,7 +29,7 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spf4j.version>8.6.1</spf4j.version>
+    <spf4j.version>8.6.2-SNAPSHOT</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
     <avro.version>1.8.1.38p</avro.version>
     <bintray.subject>zolyfarkas</bintray.subject>
@@ -49,6 +49,9 @@
     <avro.validator.maxNrOfDaysBackCheckForCompatibility>365</avro.validator.maxNrOfDaysBackCheckForCompatibility>
     <avro.createSetters>false</avro.createSetters>
     <avro.validator.validFieldNames>id</avro.validator.validFieldNames>
+    <compatibility.skip>false</compatibility.skip>
+    <namesValidator.skip>false</namesValidator.skip>
+    <docValidator.skip>false</docValidator.skip>
   </properties>
 
     <url>${scm.url}</url>
@@ -138,10 +141,13 @@
             <allowUndefinedLogicalTypes>${avro.allowUndefinedLogicalTypes}</allowUndefinedLogicalTypes>
           </systemProperties>
           <validatorConfigs>
+            <compatibility.skip>${compatibility.skip}</compatibility.skip>
             <compatibility.maxNrOfVersionsToCheckForCompatibility>${avro.validator.maxNrOfVersionsToCheckForCompatibility}</compatibility.maxNrOfVersionsToCheckForCompatibility>
             <compatibility.maxNrOfDaysBackCheckForCompatibility>${avro.validator.maxNrOfDaysBackCheckForCompatibility}</compatibility.maxNrOfDaysBackCheckForCompatibility>
             <compatibility.deprecationRemoval>${avro.validator.deprecationRemoval}</compatibility.deprecationRemoval>
             <namesValidator.validFieldNames>${avro.validator.validFieldNames}</namesValidator.validFieldNames>
+            <namesValidator.skip>${namesValidator.skip}</namesValidator.skip>
+            <docValidator.skip>${docValidator.skip}</docValidator.skip>
           </validatorConfigs>
         </configuration>
         <dependencies>
