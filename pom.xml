@@ -53,6 +53,9 @@
     <namesValidator.skip>false</namesValidator.skip>
     <docValidator.skip>false</docValidator.skip>
     <compatibility.versionRange>[,${project.version})</compatibility.versionRange>
+    <scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>    
+    <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
+    <scm-publish.pubScmUrl>${scm.connection}</scm-publish.pubScmUrl>
   </properties>
 
     <url>${scm.url}</url>
@@ -258,6 +261,7 @@
             <configuration>
               <skip>${skip.avrodoc}</skip>
               <target>
+                <mkdir dir="${project.basedir}/target/avrodoc"/>
                 <fileset id="fileset" dir="${project.basedir}/target/generated-sources/avsc">
                   <include name="**/*.avsc" />
                 </fileset>
@@ -267,10 +271,20 @@
                 <exec executable="${project.basedir}/target/node/node" dir="${project.basedir}/target/generated-sources/avsc">
                   <arg value="${project.basedir}/target/lib/node_modules/avrodoc/bin/avrodoc" />
                   <arg line="${converted}" />
-                  <arg value="-o${project.basedir}/target/avrodoc.html" />
+                  <arg value="-o${project.basedir}/target/avrodoc/avrodoc.html" />
                 </exec>
+                <echoxml file = "${project.basedir}/target/avrodoc/index.html">
+                  <head>
+                  <META http-equiv="refresh" content="0;URL=avrodoc.html"></META>
+                  </head>
+                </echoxml>
+                <echoxml file = "${project.basedir}/target/avrodoc/index.html" append = "true">
+                  <body>
+                    <a href="avrodoc.html">Click here if auto redirect is not happening automatically</a>
+                  </body>
+                </echoxml>
                 <zip destfile="${project.basedir}/target/avrodoc.jar">
-                  <fileset dir="${project.basedir}/target" includes="avrodoc.html" />
+                  <fileset dir="${project.basedir}/target/avrodoc" includes="avrodoc.html" />
                 </zip>
               </target>
             </configuration>
@@ -283,7 +297,7 @@
             <configuration>
               <target>
                 <mkdir dir="target/site" />
-                <copy file="target/avrodoc.html" todir="target/site" />
+                <copy file="target/avrodoc/avrodoc.html" todir="target/site" />
               </target>
             </configuration>
           </execution>
@@ -329,6 +343,28 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <version>3.0.0</version>
+        <inherited>true</inherited>
+        <executions>
+          <execution>
+            <phase>deploy</phase>
+            <goals>
+              <goal>publish-scm</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <checkoutDirectory>${scmPublish.checkoutDirectory}</checkoutDirectory>
+          <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}</checkinComment>
+          <content>${project.basedir}/target/avrodoc</content>
+          <skipDeletedFiles>true</skipDeletedFiles>
+          <pubScmUrl>${scm-publish.pubScmUrl}</pubScmUrl>
+          <scmBranch>${scm-publish.scmBranch}</scmBranch>
+        </configuration>
       </plugin>
     </plugins>
   </build>
