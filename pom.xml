@@ -21,7 +21,7 @@
 
   <groupId>org.spf4j.avro</groupId>
   <artifactId>schema-parent-pom</artifactId>
-  <version>0.14-SNAPSHOT</version>
+  <version>0.14</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}-${project.version}</name>
   <description>Avro schema project parent</description>
@@ -115,7 +115,7 @@
     <connection>${scm.connection}</connection>
     <developerConnection>${scm.connection}</developerConnection>
     <url>${scm.url}</url>
-    <tag>HEAD</tag>
+    <tag>schema-parent-pom-0.14</tag>
   </scm>
 
   <build>
@@ -261,7 +261,7 @@
             <configuration>
               <skip>${skip.avrodoc}</skip>
               <target>
-                <mkdir dir="${project.basedir}/target/avrodoc"/>
+                <mkdir dir="${project.basedir}/target/avrodoc" />
                 <fileset id="fileset" dir="${project.basedir}/target/generated-sources/avsc">
                   <include name="**/*.avsc" />
                 </fileset>
@@ -273,12 +273,12 @@
                   <arg line="${converted}" />
                   <arg value="-o${project.basedir}/target/avrodoc/avrodoc.html" />
                 </exec>
-                <echoxml file = "${project.basedir}/target/avrodoc/index.html">
+                <echoxml file="${project.basedir}/target/avrodoc/index.html">
                   <head>
-                  <META http-equiv="refresh" content="0;URL=avrodoc.html"></META>
+                  <META http-equiv="refresh" content="0;URL=avrodoc.html" />
                   </head>
                 </echoxml>
-                <echoxml file = "${project.basedir}/target/avrodoc/index.html" append = "true">
+                <echoxml file="${project.basedir}/target/avrodoc/index.html" append="true">
                   <body>
                     <a href="avrodoc.html">Click here if auto redirect is not happening automatically</a>
                   </body>
