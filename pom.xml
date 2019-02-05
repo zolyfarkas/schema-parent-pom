@@ -53,7 +53,8 @@
     <namesValidator.skip>false</namesValidator.skip>
     <docValidator.skip>false</docValidator.skip>
     <compatibility.versionRange>[,${project.version})</compatibility.versionRange>
-    <scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>    
+    <skip.scm-publish>false</skip.scm-publish>
+    <scm-publish.checkoutDirectory>${project.build.directory}/scmpublish</scm-publish.checkoutDirectory>
     <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
     <scm-publish.pubScmUrl>${scm.connection}</scm-publish.pubScmUrl>
   </properties>
@@ -107,6 +108,7 @@
       </activation>
       <properties>
           <skip.avrodoc>true</skip.avrodoc>
+          <skip.scm-publish>true</skip.scm-publish>
       </properties>
     </profile>
   </profiles>
@@ -348,7 +350,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-scm-publish-plugin</artifactId>
         <version>3.0.0</version>
-        <inherited>true</inherited>
         <executions>
           <execution>
             <phase>deploy</phase>
@@ -358,7 +359,8 @@
           </execution>
         </executions>
         <configuration>
-          <checkoutDirectory>${scmPublish.checkoutDirectory}</checkoutDirectory>
+          <skip>${skip.scm-publish}</skip>
+          <checkoutDirectory>${scm-publish.checkoutDirectory}</checkoutDirectory>
           <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}</checkinComment>
           <content>${project.basedir}/target/avrodoc</content>
           <skipDeletedFiles>true</skipDeletedFiles>
