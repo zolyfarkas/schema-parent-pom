@@ -31,7 +31,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spf4j.version>8.6.3</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
-    <avro.version>1.8.1.49p</avro.version>
+    <avro.version>1.8.1.50p</avro.version>
     <bintray.subject>zolyfarkas</bintray.subject>
     <bintray.repo>core</bintray.repo>
     <bintray.package>${project.artifactId}</bintray.package>
@@ -49,6 +49,7 @@
     <avro.validator.maxNrOfDaysBackCheckForCompatibility>365</avro.validator.maxNrOfDaysBackCheckForCompatibility>
     <avro.createSetters>false</avro.createSetters>
     <avro.validator.validFieldNames>id</avro.validator.validFieldNames>
+    <avro.useSchemaReferencesForAvsc>false</avro.useSchemaReferencesForAvsc>
     <compatibility.skip>false</compatibility.skip>
     <namesValidator.skip>false</namesValidator.skip>
     <docValidator.skip>false</docValidator.skip>
@@ -154,6 +155,7 @@
         <configuration>
           <createSetters>${avro.createSetters}</createSetters>
           <deleteProtocolInterface>${avro.deleteProtocolInterface}</deleteProtocolInterface>
+          <useSchemaReferencesForAvsc>${avro.useSchemaReferencesForAvsc}</useSchemaReferencesForAvsc>
           <systemProperties>
             <allowUndefinedLogicalTypes>${avro.allowUndefinedLogicalTypes}</allowUndefinedLogicalTypes>
           </systemProperties>
