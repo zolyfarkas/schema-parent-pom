@@ -6,9 +6,13 @@ This a parent pom for schema projects.
 
   * Compose data models using maven dependency framework. Use the maven to re-use, version, release and publish avro data models. (test-schema -> test-schema-common)
 
-  * Validate avro schemas ([extensile](http://www.spf4j.org/spf4j-avro-components/maven-avro-schema-plugin/avro-validate-mojo.html)). (documentation, naming,  compatibility with previously released versions...)
+  * Validate avro schemas ([extensible](http://www.spf4j.org/spf4j-avro-components/maven-avro-schema-plugin/avro-validate-mojo.html)). (documentation, naming,  compatibility with previously released versions...)
 
   * Add a unique ID to the schemas (mvnId = "group:artifact:version:id")
+
+  * Easy to use, flexible resolvers to resolve schema IDs (pick the one that fits your dependencies best):
+ [jaxrs based](https://github.com/zolyfarkas/spf4j-jaxrs/blob/master/spf4j-jaxrs-client/src/main/java/org/spf4j/avro/SchemaClient.java)
+  or [aether based](https://github.com/zolyfarkas/spf4j/blob/master/spf4j-maven-schema-resolver/src/main/java/org/spf4j/maven/MavenSchemaResolver.java)
 
   * Generate and publish java classes along with javadoc. (publishing for other languages can se set up) (@Imutable support, @Nullable/@Nonnull) [see](https://bintray.com/zolyfarkas/core/download_file?file_path=org%2Fspf4j%2Favro%2Fexamples%2Ftest-schema%2F1.1%2Ftest-schema-1.1.jar)
 
@@ -16,6 +20,7 @@ This a parent pom for schema projects.
   
   * Generate and publish avrodoc, [see](https://bintray.com/zolyfarkas/core/download_file?file_path=org%2Fspf4j%2Favro%2Fexamples%2Ftest-schema%2F1.1%2Ftest-schema-1.1-avrodoc.jar) for  maven repo publish
     [or](https://zolyfarkas.github.io/fred-schema/) for gh-pages doc publish.
+
 
 
 Here is how a schema project that uses this parent will look like:
