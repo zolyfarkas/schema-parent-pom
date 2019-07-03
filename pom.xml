@@ -103,6 +103,17 @@
 
   <profiles>
     <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <cmd.ext>.cmd</cmd.ext>
+      </properties>
+    </profile>
+    <profile>
       <activation>
         <file><exists>parent.marker</exists></file>
       </activation>
@@ -228,7 +239,7 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.6</version>
+        <version>1.7.6</version>
         <!-- executions go here -->
         <executions>
           <execution>
@@ -249,7 +260,8 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>install avrodoc -g</arguments>
+              <arguments>install avrodoc</arguments>
+              <workingDirectory>${project.basedir}/target/node</workingDirectory>
             </configuration>
           </execution>
         </executions>
@@ -280,13 +292,14 @@
                 <fileset id="fileset" dir="${project.basedir}/target/generated-sources/avsc">
                   <include name="**/*.avsc" />
                 </fileset>
-                <pathconvert refid="fileset" property="converted" pathsep=" ">
-                  <globmapper from="${project.basedir}/target/generated-sources/avsc/*" to="*" />
+                <pathconvert refid="fileset" property="converted" pathsep=" " dirsep="/" >
+                  <globmapper from="${project.basedir}${file.separator}target${file.separator}generated-sources${file.separator}avsc${file.separator}*" to="*" />
                 </pathconvert>
                 <exec executable="${project.basedir}/target/node/node" dir="${project.basedir}/target/generated-sources/avsc">
-                  <arg value="${project.basedir}/target/lib/node_modules/avrodoc/bin/avrodoc" />
+                  <arg value="${project.basedir}/target/node/node_modules/avrodoc/bin/avrodoc" />
                   <arg line="${converted}" />
-                  <arg value="-o${project.basedir}/target/avrodoc/avrodoc.html" />
+                  <arg value="-o" /> 
+                  <arg value="${project.basedir}/target/avrodoc/avrodoc.html" />
                 </exec>
                 <echoxml file="${project.basedir}/target/avrodoc/index.html">
                   <head>
