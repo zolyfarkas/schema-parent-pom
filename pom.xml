@@ -159,6 +159,27 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+          <providerImplementations>
+            <git>git</git>
+          </providerImplementations>
+          <doCheck>false</doCheck>
+          <doUpdate>false</doUpdate>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.spf4j</groupId>
         <artifactId>maven-avro-schema-plugin</artifactId>
         <version>${spf4j.version}</version>
