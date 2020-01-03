@@ -32,9 +32,6 @@
     <spf4j.version>8.6.27</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
     <avro.version>1.9.0.15p</avro.version>
-    <bintray.subject>zolyfarkas</bintray.subject>
-    <bintray.repo>core</bintray.repo>
-    <bintray.package>${project.artifactId}</bintray.package>
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
     <scm.connection>scm:git:${scm.url}.git</scm.connection>
     <skip.avrodoc>false</skip.avrodoc>
@@ -95,10 +92,14 @@
     </repositories>
 
   <distributionManagement>
-        <repository>
-            <id>bintray-zolyfarkas-core</id>
-            <url>https://api.bintray.com/maven/${bintray.subject}/${bintray.repo}/${bintray.package}/;publish=1</url>
-        </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
   </distributionManagement>
 
   <profiles>
@@ -158,6 +159,31 @@
       </plugins>
     </pluginManagement>
     <plugins>
+     <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.5</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
