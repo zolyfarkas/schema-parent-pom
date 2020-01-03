@@ -102,6 +102,17 @@
     </repository>
   </distributionManagement>
 
+  <developers>
+    <developer>
+      <name>Zoltan Farkas</name>
+      <timezone>ET</timezone>
+      <roles>
+        <role>Lead</role>
+      </roles>
+      <url>https://github.com/zolyfarkas</url>
+    </developer>
+  </developers>
+
   <profiles>
     <profile>
       <id>windows</id>
