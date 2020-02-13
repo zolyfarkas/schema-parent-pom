@@ -29,13 +29,11 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spf4j.version>8.6.34</spf4j.version>
+    <spf4j.version>8.7.4</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
     <avro.version>1.9.0.18p</avro.version>
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
     <scm.connection>scm:git:${scm.url}.git</scm.connection>
-    <skip.avrodoc>false</skip.avrodoc>
-    <skip.avrodoc.html>true</skip.avrodoc.html> <!-- set to false if html should be published to repo -->
     <node.downloadUrl>https://nodejs.org/dist/</node.downloadUrl>
     <npm.downloadUrl>https://registry.npmjs.org/npm/-/</npm.downloadUrl>
     <npm.registryUrl />
@@ -54,42 +52,43 @@
     <scm-publish.checkoutDirectory>${project.build.directory}/scmpublish</scm-publish.checkoutDirectory>
     <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
     <scm-publish.pubScmUrl>${scm.connection}</scm-publish.pubScmUrl>
+    <skip.avrodoc>false</skip.avrodoc>
   </properties>
 
-    <url>${scm.url}</url>
-    <organization>
-      <name>SPF4J</name>
-      <url>http://www.spf4j.org</url>
-    </organization>
+  <url>${scm.url}</url>
+  <organization>
+    <name>SPF4J</name>
+    <url>http://www.spf4j.org</url>
+  </organization>
     
-    <licenses>
-        <license>
-            <name>GNU Library or Lesser General Public License (LGPL) 3.0</name>
-            <url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-        <license>
-            <name>GNU Library or Lesser General Public License (LGPL) 2.1</name>
-            <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
-            <distribution>repo</distribution>
-        </license>
-        <license>
-          <name>The Apache Software License, Version 2.0</name>
-          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-          <distribution>repo</distribution>
-        </license>
-    </licenses>
+  <licenses>
+    <license>
+      <name>GNU Library or Lesser General Public License (LGPL) 3.0</name>
+      <url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>GNU Library or Lesser General Public License (LGPL) 2.1</name>
+      <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-    <repositories>
-      <repository>
-        <snapshots>
-          <enabled>false</enabled>
-        </snapshots>
-        <id>bintray-zolyfarkas-core</id>
-        <name>bintray</name>
-        <url>https://dl.bintray.com/zolyfarkas/core</url>
-      </repository>
-    </repositories>
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>bintray-zolyfarkas-core</id>
+      <name>bintray</name>
+      <url>https://dl.bintray.com/zolyfarkas/core</url>
+    </repository>
+  </repositories>
 
   <distributionManagement>
     <snapshotRepository>
@@ -127,27 +126,157 @@
     </profile>
     <profile>
       <activation>
-        <file><exists>parent.marker</exists></file>
+        <file>
+          <missing>parent.marker</missing>
+        </file>
       </activation>
-      <properties>
-          <skip.avrodoc>true</skip.avrodoc>
-      </properties>
       <build>
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-scm-publish-plugin</artifactId>
-              <executions>
-                  <execution>
-                      <phase>none</phase>
-                  </execution>
-              </executions>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>publish-scm</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <checkoutDirectory>${scm-publish.checkoutDirectory}</checkoutDirectory>
+              <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}</checkinComment>
+              <content>${project.basedir}/target/avrodoc</content>
+              <skipDeletedFiles>true</skipDeletedFiles>
+              <pubScmUrl>${scm-publish.pubScmUrl}</pubScmUrl>
+              <scmBranch>${scm-publish.scmBranch}</scmBranch>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.7.6</version>
+            <!-- executions go here -->
+            <executions>
+              <execution>
+                <id>install node and npm</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>install-node-and-npm</goal>
+                </goals>
+                <configuration>
+                  <nodeVersion>v4.4.4</nodeVersion>
+                  <npmVersion>2.15.1</npmVersion>
+                </configuration>
+              </execution>
+              <execution>
+                <id>install AVRODOC</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>install avrodoc</arguments>
+                  <workingDirectory>${project.basedir}/target/node</workingDirectory>
+                </configuration>
+              </execution>
+            </executions>
+            <configuration>
+              <nodeDownloadRoot>${node.downloadUrl}</nodeDownloadRoot>
+              <npmDownloadRoot>${npm.downloadUrl}</npmDownloadRoot>
+              <npmRegistryURL>${npm.registryUrl}</npmRegistryURL>
+              <skip>${skip.avrodoc}</skip>
+              <installDirectory>${project.basedir}/target</installDirectory>
+            </configuration>
+          </plugin>
+          <!-- Generate avrodoc archive -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+              <execution>
+                <id>generate avrodoc for all schemas</id>
+                <phase>process-classes</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <skip>${skip.avrodoc}</skip>
+                  <target>
+                    <mkdir dir="${project.basedir}/target/avrodoc" />
+                    <fileset id="fileset" dir="${project.basedir}/target/generated-sources/avsc">
+                      <include name="**/*.avsc" />
+                    </fileset>
+                    <pathconvert refid="fileset" property="converted" pathsep=" " dirsep="/">
+                      <globmapper from="${project.basedir}${file.separator}target${file.separator}generated-sources${file.separator}avsc${file.separator}*" to="*" />
+                    </pathconvert>
+                    <exec executable="${project.basedir}/target/node/node" dir="${project.basedir}/target/generated-sources/avsc">
+                      <arg value="${project.basedir}/target/node/node_modules/avrodoc/bin/avrodoc" />
+                      <arg line="${converted}" />
+                      <arg value="-o" />
+                      <arg value="${project.basedir}/target/avrodoc/avrodoc.html" />
+                    </exec>
+                    <echoxml file="${project.basedir}/target/avrodoc/index.html">
+                      <head>
+                        <META http-equiv="refresh" content="0;URL=avrodoc.html" />
+                      </head>
+                    </echoxml>
+                    <echoxml file="${project.basedir}/target/avrodoc/index.html" append="true">
+                      <body>
+                        <a href="avrodoc.html">Click here if auto redirect is not happening automatically</a>
+                      </body>
+                    </echoxml>
+                    <zip destfile="${project.basedir}/target/avrodoc.jar">
+                      <fileset dir="${project.basedir}/target/avrodoc" includes="avrodoc.html" />
+                    </zip>
+                  </target>
+                </configuration>
+              </execution>
+              <execution>
+                <phase>site</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <mkdir dir="target/site" />
+                    <copy file="target/avrodoc/avrodoc.html" todir="target/site" />
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <id>attach-avrodoc</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>attach-artifact</goal>
+                </goals>
+                <configuration>
+                  <skipAttach>${skip.avrodoc}</skipAttach>
+                  <artifacts>
+                    <artifact>
+                      <file>${project.basedir}/target/avrodoc.jar</file>
+                      <type>jar</type>
+                      <classifier>avrodoc</classifier>
+                    </artifact>
+                  </artifacts>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>
     </profile>
-     <profile>
-       <id>sonatype</id>
+    <profile>
+      <id>sonatype</id>
       <activation> <!-- deactivate if you do not deploy to maven central -P !sonatype -->
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -269,8 +398,8 @@
         <configuration>
           <fork>true</fork>
           <!--
-          <executable>${java.home}/bin/javac</executable>
-            -->
+        <executable>${java.home}/bin/javac</executable>
+          -->
           <compilerVersion>${java.version}</compilerVersion>
           <source>${java.version}</source>
           <target>${java.version}</target>
@@ -303,163 +432,6 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.3</version>
-      </plugin>
-      <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.7.6</version>
-        <!-- executions go here -->
-        <executions>
-          <execution>
-            <id>install node and npm</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>install-node-and-npm</goal>
-            </goals>
-            <configuration>
-              <nodeVersion>v4.4.4</nodeVersion>
-              <npmVersion>2.15.1</npmVersion>
-            </configuration>
-          </execution>
-          <execution>
-            <id>install AVRODOC</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <configuration>
-              <arguments>install avrodoc</arguments>
-              <workingDirectory>${project.basedir}/target/node</workingDirectory>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <nodeDownloadRoot>${node.downloadUrl}</nodeDownloadRoot>
-          <npmDownloadRoot>${npm.downloadUrl}</npmDownloadRoot>
-          <npmRegistryURL>${npm.registryUrl}</npmRegistryURL>
-          <skip>${skip.avrodoc}</skip>
-          <installDirectory>${project.basedir}/target</installDirectory>
-        </configuration>
-      </plugin>
-      <!-- Generate avrodoc archive -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <id>generate avrodoc for all schemas</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <skip>${skip.avrodoc}</skip>
-              <target>
-                <mkdir dir="${project.basedir}/target/avrodoc" />
-                <fileset id="fileset" dir="${project.basedir}/target/generated-sources/avsc">
-                  <include name="**/*.avsc" />
-                </fileset>
-                <pathconvert refid="fileset" property="converted" pathsep=" " dirsep="/">
-                  <globmapper from="${project.basedir}${file.separator}target${file.separator}generated-sources${file.separator}avsc${file.separator}*" to="*" />
-                </pathconvert>
-                <exec executable="${project.basedir}/target/node/node" dir="${project.basedir}/target/generated-sources/avsc">
-                  <arg value="${project.basedir}/target/node/node_modules/avrodoc/bin/avrodoc" />
-                  <arg line="${converted}" />
-                  <arg value="-o" /> 
-                  <arg value="${project.basedir}/target/avrodoc/avrodoc.html" />
-                </exec>
-                <echoxml file="${project.basedir}/target/avrodoc/index.html">
-                  <head>
-                  <META http-equiv="refresh" content="0;URL=avrodoc.html" />
-                  </head>
-                </echoxml>
-                <echoxml file="${project.basedir}/target/avrodoc/index.html" append="true">
-                  <body>
-                    <a href="avrodoc.html">Click here if auto redirect is not happening automatically</a>
-                  </body>
-                </echoxml>
-                <zip destfile="${project.basedir}/target/avrodoc.jar">
-                  <fileset dir="${project.basedir}/target/avrodoc" includes="avrodoc.html" />
-                </zip>
-              </target>
-            </configuration>
-          </execution>
-          <execution>
-            <phase>site</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <target>
-                <mkdir dir="target/site" />
-                <copy file="target/avrodoc/avrodoc.html" todir="target/site" />
-              </target>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <id>attach-avrodoc</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>attach-artifact</goal>
-            </goals>
-            <configuration>
-              <skipAttach>${skip.avrodoc}</skipAttach>
-               <artifacts>
-                  <artifact>
-                      <file>${project.basedir}/target/avrodoc.jar</file>
-                      <type>jar</type>
-                      <classifier>avrodoc</classifier>
-                  </artifact>
-               </artifacts>
-            </configuration>
-          </execution>
-          <execution>
-            <id>attach-avrodoc-html</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>attach-artifact</goal>
-            </goals>
-            <configuration>
-              <skipAttach>${skip.avrodoc.html}</skipAttach>
-               <artifacts>
-                  <artifact>
-                      <file>${project.basedir}/target/avrodoc.html</file>
-                      <type>html</type>
-                      <classifier>avrodoc</classifier>
-                  </artifact>
-               </artifacts>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-scm-publish-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <phase>deploy</phase>
-            <goals>
-              <goal>publish-scm</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <checkoutDirectory>${scm-publish.checkoutDirectory}</checkoutDirectory>
-          <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}</checkinComment>
-          <content>${project.basedir}/target/avrodoc</content>
-          <skipDeletedFiles>true</skipDeletedFiles>
-          <pubScmUrl>${scm-publish.pubScmUrl}</pubScmUrl>
-          <scmBranch>${scm-publish.scmBranch}</scmBranch>
-        </configuration>
       </plugin>
     </plugins>
   </build>
