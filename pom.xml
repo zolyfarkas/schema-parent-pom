@@ -29,7 +29,7 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spf4j.version>8.7.4</spf4j.version>
+    <spf4j.version>8.8.0</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
     <avro.version>1.9.0.18p</avro.version>
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
@@ -299,7 +299,7 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.5</version>
+            <version>1.6.8</version>
             <extensions>true</extensions>
             <configuration>
               <serverId>ossrh</serverId>
