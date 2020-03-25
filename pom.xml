@@ -125,6 +125,7 @@
       </properties>
     </profile>
     <profile>
+      <id>schema-build</id>
       <activation>
         <file>
           <missing>parent.marker</missing>
@@ -298,6 +299,13 @@
               </execution>
             </executions>
             <configuration>
+              <tags>
+                <tag>
+                  <name>exclude</name>
+                  <placement>a</placement>
+                  <head>Open Api:</head>
+                </tag>
+              </tags>
               <failOnError>false</failOnError>
               <quiet>true</quiet>
             </configuration>
