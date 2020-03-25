@@ -307,8 +307,12 @@
     </profile>
     <profile>
       <id>sonatype</id>
-      <activation> <!-- deactivate if you do not deploy to maven central -P !sonatype -->
-        <activeByDefault>true</activeByDefault>
+      <activation> <!-- deactivate if you do not deploy to maven central by creating empty file in project root: sonatype.ignore -->
+        <file>
+          <missing>
+            sonatype.ignore
+          </missing>
+        </file>
       </activation>
       <build>
         <plugins>
