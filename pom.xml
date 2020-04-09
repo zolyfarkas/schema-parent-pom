@@ -29,9 +29,9 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spf4j.version>8.8.0</spf4j.version>
+    <spf4j.version>8.8.1</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
-    <avro.version>1.9.0.18p</avro.version>
+    <avro.version>1.9.0.19p</avro.version>
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
     <scm.connection>scm:git:${scm.url}.git</scm.connection>
     <node.downloadUrl>https://nodejs.org/dist/</node.downloadUrl>
