@@ -25,6 +25,7 @@ This a parent pom for schema projects.
   * Generate and publish avrodoc, [see](https://bintray.com/zolyfarkas/core/download_file?file_path=org%2Fspf4j%2Favro%2Fexamples%2Ftest-schema%2F1.1%2Ftest-schema-1.1-avrodoc.jar) for  maven repo publish
     [or](https://zolyfarkas.github.io/fred-schema/) for gh-pages doc publish.
 
+Latest Version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.spf4j.avro/schema-parent-pom/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.spf4j.avro/schema-parent-pom/)
 
 
 Here is how a schema project that uses this parent will look like:
