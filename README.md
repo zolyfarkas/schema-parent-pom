@@ -6,7 +6,11 @@ This a parent pom for schema projects.
 
   * Compose data models using maven dependency framework. Use the maven to re-use, version, release and publish avro data models. (test-schema -> test-schema-common)
 
-  * Validate avro schemas ([extensible](http://www.spf4j.org/spf4j-avro-components/maven-avro-schema-plugin/avro-validate-mojo.html)). (documentation, naming,  compatibility with previously released versions...)
+  * Validate avro schemas:
+    * documentation
+    * naming
+    * compatibility with previously released versions (to avoid production issues [like](https://www.theregister.co.uk/2020/05/08/facebook_sdk_snafu_ios/))...)
+    * [extensible](http://www.spf4j.org/spf4j-avro-components/maven-avro-schema-plugin/avro-validate-mojo.html)
 
   * Add a unique ID to the schemas (mvnId = "group:artifact:version:id")
 
