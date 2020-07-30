@@ -29,9 +29,9 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spf4j.version>8.8.1</spf4j.version>
+    <spf4j.version>8.8.4</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
-    <avro.version>1.9.0.19p</avro.version>
+    <avro.version>1.9.0.20p</avro.version>
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
     <scm.connection>scm:git:${scm.url}.git</scm.connection>
     <node.downloadUrl>https://nodejs.org/dist/</node.downloadUrl>
@@ -178,7 +178,7 @@
                   <goal>npm</goal>
                 </goals>
                 <configuration>
-                  <arguments>install  @ckatzorke/avrodoc-plus</arguments>
+                  <arguments>install  mobimeo/avrodoc-plus</arguments>
                   <workingDirectory>${project.basedir}/target/node</workingDirectory>
                 </configuration>
               </execution>
@@ -214,7 +214,7 @@
                       <globmapper from="${project.basedir}${file.separator}target${file.separator}generated-sources${file.separator}avsc${file.separator}*" to="*" />
                     </pathconvert>
                     <exec executable="${project.basedir}/target/node/node" dir="${project.basedir}/target/generated-sources/avsc">
-                      <arg value="${project.basedir}/target/node/node_modules/@ckatzorke/avrodoc-plus/bin/avrodoc-plus" />
+                      <arg value="${project.basedir}/target/node/node_modules/@mobimeo/avrodoc-plus/bin/avrodoc-plus" />
                       <arg line="${converted}" />
                       <arg value="-o" />
                       <arg value="${project.basedir}/target/avrodoc/avrodoc.html" />
