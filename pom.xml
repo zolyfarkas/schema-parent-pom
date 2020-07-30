@@ -167,8 +167,8 @@
                   <goal>install-node-and-npm</goal>
                 </goals>
                 <configuration>
-                  <nodeVersion>v4.4.4</nodeVersion>
-                  <npmVersion>2.15.1</npmVersion>
+                  <nodeVersion>v10.10.0</nodeVersion>
+<!--                  <npmVersion>2.15.9</npmVersion> -->
                 </configuration>
               </execution>
               <execution>
@@ -178,7 +178,7 @@
                   <goal>npm</goal>
                 </goals>
                 <configuration>
-                  <arguments>install avrodoc</arguments>
+                  <arguments>install  @ckatzorke/avrodoc-plus</arguments>
                   <workingDirectory>${project.basedir}/target/node</workingDirectory>
                 </configuration>
               </execution>
@@ -214,7 +214,7 @@
                       <globmapper from="${project.basedir}${file.separator}target${file.separator}generated-sources${file.separator}avsc${file.separator}*" to="*" />
                     </pathconvert>
                     <exec executable="${project.basedir}/target/node/node" dir="${project.basedir}/target/generated-sources/avsc">
-                      <arg value="${project.basedir}/target/node/node_modules/avrodoc/bin/avrodoc" />
+                      <arg value="${project.basedir}/target/node/node_modules/@ckatzorke/avrodoc-plus/bin/avrodoc-plus" />
                       <arg line="${converted}" />
                       <arg value="-o" />
                       <arg value="${project.basedir}/target/avrodoc/avrodoc.html" />
