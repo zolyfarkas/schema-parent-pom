@@ -31,7 +31,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spf4j.version>8.8.5</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
-    <avro.version>1.10.0.0p</avro.version>
+    <avro.version>1.10.0.1p</avro.version>
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
     <scm.connection>scm:git:${scm.url}.git</scm.connection>
     <node.downloadUrl>https://nodejs.org/dist/</node.downloadUrl>
@@ -79,16 +79,26 @@
     </license>
   </licenses>
 
+
   <repositories>
     <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/zolyfarkas/*</url>
       <snapshots>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
       </snapshots>
-      <id>bintray-zolyfarkas-core</id>
-      <name>bintray</name>
-      <url>https://dl.bintray.com/zolyfarkas/core</url>
     </repository>
   </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/zolyfarkas/*</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <distributionManagement>
     <snapshotRepository>
