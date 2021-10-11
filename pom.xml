@@ -29,9 +29,10 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spf4j.version>8.9.0</spf4j.version>
+    <spf4j.version>8.9.1</spf4j.version>
     <!-- default to my fork: https://github.com/zolyfarkas/avro/blob/trunk/README.md -->
-    <avro.version>1.10.0.3p</avro.version>
+    <avro.version>1.10.0.5p</avro.version>
+    <avro.logical.types.version>1.1</avro.logical.types.version>
     <scm.url>https://github.com/zolyfarkas/schema-parent-pom</scm.url>
     <scm.connection>scm:git:${scm.url}.git</scm.connection>
     <node.downloadUrl>https://nodejs.org/dist/</node.downloadUrl>
@@ -428,6 +429,11 @@
             <artifactId>avro-compiler</artifactId>
             <version>${avro.version}</version>
           </dependency>
+          <dependency>
+            <groupId>org.spf4j</groupId>
+            <artifactId>avro-logical-types-fork</artifactId>
+            <version>${avro.logical.types.version}</version>
+          </dependency>
         </dependencies>
       </plugin>
       <plugin>
@@ -497,6 +503,11 @@
           <artifactId>xz</artifactId>
         </exclusion>
       </exclusions>      
+    </dependency>
+    <dependency>
+      <groupId>org.spf4j</groupId>
+      <artifactId>avro-logical-types-fork</artifactId>
+      <version>${avro.logical.types.version}</version>
     </dependency>
     <dependency> <!-- necessary for zolyfarkas/avro fork -->
       <groupId>com.google.code.findbugs</groupId>
