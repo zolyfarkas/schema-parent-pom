@@ -147,7 +147,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-enforcer-plugin</artifactId>
-            <version>3.0.0-M2</version>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <id>enforce-maven</id>
@@ -157,7 +157,7 @@
                 <configuration>
                   <rules>
                     <requireMavenVersion>
-                      <version>(3.0.0,3.6.3]</version>
+                      <version>[3.0.0,]</version>
                     </requireMavenVersion>
                   </rules>
                 </configuration>
@@ -188,7 +188,7 @@
           <plugin>
             <groupId>com.github.eirslett</groupId>
             <artifactId>frontend-maven-plugin</artifactId>
-            <version>1.7.6</version>
+            <version>1.12.1</version>
             <!-- executions go here -->
             <executions>
               <execution>
@@ -199,7 +199,6 @@
                 </goals>
                 <configuration>
                   <nodeVersion>v10.10.0</nodeVersion>
-<!--                  <npmVersion>2.15.9</npmVersion> -->
                 </configuration>
               </execution>
               <execution>
